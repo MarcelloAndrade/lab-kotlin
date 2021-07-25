@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  wiremock:
+    image: holomekc/wiremock-gui:2.27.2.1
+    container_name: wiremock-spring-boot
+    ports:
+      - "8091:8080"
+    volumes:
+      - ./mocks/mappings:/home/wiremock/mappings
+    environment:
+      WIREMOCK_OPTIONS: "--local-response-templating,--root-dir=/home/wiremock"

@@ -17,7 +17,6 @@ class CustomerController {
     lateinit var customerUseCase: CustomerUseCase
 
     @GetMapping("/v1/{id}")
-
     fun getCustomerById(
         @PathVariable("id") id: String,
         @RequestHeader(HeadersCost.HEADER_CLIENT_ID) xClientId: String
