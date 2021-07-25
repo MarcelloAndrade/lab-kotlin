@@ -6,9 +6,11 @@ import br.com.kotlin.application.port.out.CustomerRepository
 import org.springframework.stereotype.Service
 
 @Service
-class CustomerService (private val customerRepository: CustomerRepository) : CustomerUseCase {
+class CustomerService (
+    private val customerRepository: CustomerRepository
+) : CustomerUseCase {
 
-    override fun execute(id: String): Customer {
-        return customerRepository.getByCustomerId(id)
+    override fun execute(cep: String): Customer {
+        return customerRepository.getByCep(cep)
     }
 }

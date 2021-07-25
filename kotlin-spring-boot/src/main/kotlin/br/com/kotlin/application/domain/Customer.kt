@@ -9,8 +9,18 @@ import java.time.LocalDateTime
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Customer(
     val id: String,
-    val firstName: String,
-    val lastName: String,
+    val name: String,
     val age: Int,
-    val timestamp: LocalDateTime
+    val timestamp: LocalDateTime,
+    val adress: Adress
+)
+
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+data class Adress(
+    val cep: String,
+    val logradouro: String,
+    val complemento: String,
+    val bairro: String,
+    val uf: String
 )

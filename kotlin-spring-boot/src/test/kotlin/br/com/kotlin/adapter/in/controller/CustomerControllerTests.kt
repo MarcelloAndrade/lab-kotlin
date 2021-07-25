@@ -42,22 +42,21 @@ internal class CustomerControllerTests {
         @JvmStatic
         fun generateArgumentsTestsForGetCustomer(): Stream<Arguments> {
             return Stream.of(
-                Arguments.arguments("f3fa24e7-dd30-4fa9-8716-61faa1bc86e2"),
-                Arguments.arguments("d0a7cbc3-b12d-43b9-8703-5631f3580575"),
-                Arguments.arguments("edd0e3af-30a9-40f7-b451-9925522ef1d7"),
-                Arguments.arguments("a857a72d-d708-4c41-ae27-91dddd759f03"),
+                Arguments.arguments("06020194"),
+                Arguments.arguments("01001-000"),
+                Arguments.arguments("19900000"),
             )
         }
     }
 
     @ParameterizedTest
     @MethodSource("generateArgumentsTestsForGetCustomer")
-    fun `Validate getCustomer when get customer ID` (customerId: String) {
+    fun `Validate getAdressCustomerByCep when get CEP customer` (cep: String) {
         val dummyCustomerResponse = dummyObject<Customer>()
-        whenever(customerUseCase.execute(customerId)).thenReturn(dummyCustomerResponse)
+        whenever(customerUseCase.execute(cep)).thenReturn(dummyCustomerResponse)
 
         val resultActions = mockMvc.perform(
-            get("/customer/v1/$customerId")
+            get("/v1/adress/$cep/customer")
                 .header(HeadersCost.HEADER_CLIENT_ID, HeadersCost.VALEU_CLIENT_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -71,7 +70,7 @@ internal class CustomerControllerTests {
                 Customer::class.java
             )
 
-        verify(customerUseCase).execute(customerId)
+        verify(customerUseCase).execute(cep)
         assertEquals(dummyCustomerResponse.id, customerResponse.id)
     }
 }

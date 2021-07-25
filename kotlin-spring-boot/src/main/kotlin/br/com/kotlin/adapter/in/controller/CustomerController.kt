@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/customer")
 class CustomerController {
 
     @Autowired
     lateinit var customerUseCase: CustomerUseCase
 
-    @GetMapping("/v1/{id}")
-    fun getCustomerById(
-        @PathVariable("id") id: String,
+    @GetMapping("/v1/adress/{cep}/customer")
+    fun getAdressCustomerByCep(
+        @PathVariable("cep") cep: String,
         @RequestHeader(HeadersCost.HEADER_CLIENT_ID) xClientId: String
     ): ResponseEntity<Customer> {
-        val response = customerUseCase.execute(id)
+        val response = customerUseCase.execute(cep)
         return ResponseEntity(response, HttpStatus.OK)
     }
 }

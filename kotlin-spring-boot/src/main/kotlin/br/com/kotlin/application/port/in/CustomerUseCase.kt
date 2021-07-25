@@ -4,6 +4,6 @@ import br.com.kotlin.application.domain.Customer
 
 interface CustomerUseCase {
 
-    fun execute(id: String): Customer
+    fun execute(cep: String): Customer
 
 }
